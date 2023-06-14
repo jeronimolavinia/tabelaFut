@@ -1,10 +1,12 @@
 import react, { useEffect, useState } from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import TeamComponent from '../teams'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TeamComponent from './teams'
 import { Image } from 'expo-image'
+import React from 'react';
 
 
-export default function Table() {
+
+export default function Table(props,{navigation}){
   const [teams, setTeam] = useState<TeamComponent[]>([]);
 
 
@@ -46,12 +48,13 @@ export default function Table() {
   }, []);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>BRASILEIRÃO</Text>
+      <Text style={styles.title}>Campeonato Brasileiro Série B</Text>
       <View style={styles.table}>
         <FlatList
           data={teams}
           keyExtractor={(item) => item.id.toString()}
           renderItem={(team) =>
+            <TouchableOpacity onPress={() => {props.navigation.navigate('details', team.item)}}>
             <View style={styles.item}>
               <Image style={styles.team_shield} source={team.item.team_shield_url} />
               <Text style={styles.team_position}>{team.item.position}</Text>
@@ -60,8 +63,8 @@ export default function Table() {
               <Text style={styles.team_position}>{team.item.victories}</Text>
               <Text style={styles.team_position}>{team.item.ties}</Text>
               <Text style={styles.team_position}>{team.item.defeats}</Text>
-
             </View>
+            </TouchableOpacity>
           }
         />
       </View>
@@ -78,7 +81,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 16,
     marginHorizontal: 16,
-    borderRadius: 10
+    borderRadius: 10,
+    borderColor:'#98FB98'
+    
   },
   title: {
     fontSize: 30,
@@ -109,7 +114,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     width: 150,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+
   },
   team_position: {
     width: 30,
