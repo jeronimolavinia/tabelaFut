@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import TeamComponent from './teams'
+import TeamComponent from '../teams'
 import { Image } from 'expo-image'
 
 
@@ -65,7 +65,6 @@ export default function Table() {
           }
         />
       </View>
-
     </View>
   );
 }
