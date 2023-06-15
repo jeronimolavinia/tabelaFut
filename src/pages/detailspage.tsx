@@ -7,9 +7,6 @@ export default function DetailsPage({route, navigation}) {
     team_shield_url, 
     team_name, 
     team_points, 
-    victories, 
-    ties, 
-    defeats
   } = route.params;
   console.log(route.params.team_name);
   return (
